@@ -1,0 +1,184 @@
+
+/* Aplica estas regras a todos os elementos */
+* {
+    box-sizing: border-box; /* Inclui padding e bordas no tamanho do elemento */
+}
+
+/* Estiliza o corpo da página */
+body {
+    background-color: whitesmoke; /* Define o fundo cinza-claro */
+    min-height: 100vh; /* Garante altura mínima de uma tela */
+    margin: 0; /* Remove a margem padrão do navegador */
+    font-family: Arial, Helvetica, sans-serif; /* Define as fontes da página */
+    color: #333; /* Define a cor padrão dos textos */
+}
+
+/* Estiliza o cabeçalho */
+header {
+    background-color: #2563eb; /* Define o fundo azul */
+    color: white; /* Define a cor branca para o texto */
+    text-align: center; /* Centraliza o título */
+    padding: 25px; /* Cria espaço interno no cabeçalho */
+}
+
+/* Estiliza o título principal */
+h1 {
+    font-size: 30px; /* Define o tamanho das letras */
+    margin: 0; /* Remove a margem padrão do título */
+}
+
+/* Organiza o conteúdo principal */
+#container-geral {
+    max-width: 900px; /* Limita a largura máxima a 900px */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    padding: 30px 20px; /* Cria espaço vertical e horizontal */
+}
+
+/* Estiliza o formulário de consulta */
+#form-consulta {
+    background-color: white; /* Define o fundo branco */
+    padding: 25px; /* Cria espaço interno */
+    border-radius: 10px; /* Arredonda os cantos */
+    margin-bottom: 25px; /* Separa o formulário do card inferior */
+    box-shadow: 0 2px 8px #00000015; /* Adiciona uma sombra suave */
+}
+
+/* Estiliza os títulos dos cards */
+h2 {
+    font-size: 20px; /* Define o tamanho dos subtítulos */
+    margin-top: 0; /* Remove a margem superior */
+    margin-bottom: 20px; /* Cria espaço abaixo do título */
+    color: #2563eb; /* Define a cor azul */
+}
+
+/* Estiliza o rótulo do CEP */
+label {
+    display: block; /* Faz o label ocupar sua própria linha */
+    margin-bottom: 8px; /* Cria espaço abaixo do label */
+    font-weight: bold; /* Deixa o texto em negrito */
+}
+
+/* Estiliza o campo de digitação */
+#input-cep {
+    display: block; /* Coloca o input em uma linha própria */
+    width: 100%; /* Ocupa toda a largura disponível */
+    padding: 12px; /* Cria espaço interno */
+    margin-bottom: 15px; /* Separa o input dos botões */
+    border: 1px solid #ccc; /* Adiciona uma borda cinza */
+    border-radius: 6px; /* Arredonda os cantos */
+    font-size: 16px; /* Define o tamanho do texto digitado */
+}
+
+/* Estiliza os dois botões */
+button {
+    padding: 12px 20px; /* Define espaço interno vertical e horizontal */
+    border: none; /* Remove a borda padrão */
+    border-radius: 6px; /* Arredonda os cantos */
+    font-size: 16px; /* Define o tamanho das letras */
+    cursor: pointer; /* Mostra a mãozinha ao passar o mouse */
+}
+
+/* Estiliza o botão Buscar */
+#botao-buscar {
+    background-color: #2563eb; /* Define o fundo azul */
+    color: white; /* Define o texto branco */
+}
+
+/* Estiliza o botão Limpar */
+#botao-limpar {
+    background-color: #e5e7eb; /* Define o fundo cinza-claro */
+    color: #333; /* Define a cor escura do texto */
+    margin-left: 8px; /* Cria espaço entre os botões */
+}
+
+/* Estiliza o botão Buscar ao passar o mouse */
+#botao-buscar:hover {
+    background-color: #1d4ed8; /* Escurece o azul */
+}
+
+/* Estiliza o botão Limpar ao passar o mouse */
+#botao-limpar:hover {
+    background-color: #d1d5db; /* Escurece o cinza */
+}
+
+/* Estiliza a área de mensagens */
+#mensagem-status {
+    margin-bottom: 0; /* Remove o espaço inferior */
+    font-size: 14px; /* Define o tamanho do texto */
+}
+
+/* Estiliza o card das informações */
+#card-informacoes {
+    background-color: white; /* Define o fundo branco */
+    padding: 25px; /* Cria espaço interno */
+    border-radius: 10px; /* Arredonda os cantos */
+    box-shadow: 0 2px 8px #00000015; /* Adiciona uma sombra suave */
+}
+
+/* Estiliza os parágrafos das informações */
+#card-informacoes p {
+    font-size: 16px; /* Define o tamanho das letras */
+    margin: 12px 0; /* Cria espaço vertical entre os parágrafos */
+}
+
+/* Estiliza os valores retornados pela API */
+#card-informacoes span {
+    font-weight: bold; /* Destaca os valores em negrito */
+    color: #2563eb; /* Define a cor azul */
+}
+
+/* Aplica ajustes em telas pequenas */
+@media (max-width: 600px) {
+    header {
+        padding: 20px; /* Reduz o espaço interno do cabeçalho */
+    }
+
+    h1 {
+        font-size: 24px; /* Diminui o título no celular */
+    }
+
+    #container-geral {
+        padding: 20px 12px; /* Reduz as margens internas */
+    }
+
+    #form-consulta,
+    #card-informacoes {
+        padding: 18px; /* Reduz o espaço interno dos cards */
+    }
+
+    button {
+        padding: 12px 15px; /* Ajusta o tamanho dos botões */
+    }
+}
+
+/* ┌─────────────────────────────────────────────┐
+│                                             │
+│              BUSCADOR DE CEP                │
+│                                             │
+├─────────────────────────────────────────────┤
+│                                             │
+│  ┌───────────────────────────────────────┐  │
+│  │           CONSULTAR CEP               │  │
+│  │                                       │  │
+│  │  Digite o CEP                         │  │
+│  │  ┌─────────────────────────────────┐  │  │
+│  │  │ 00000-000                       │  │  │
+│  │  └─────────────────────────────────┘  │  │
+│  │                                       │  │
+│  │  [   BUSCAR   ]    [   LIMPAR   ]     │  │
+│  └───────────────────────────────────────┘  │
+│                                             │
+│  ┌───────────────────────────────────────┐  │
+│  │       INFORMAÇÕES DO ENDEREÇO         │  │
+│  │                                       │  │
+│  │  CEP:         __________________      │  │
+│  │  Logradouro:  __________________      │  │
+│  │  Bairro:      __________________      │  │
+│  │  Cidade:      __________________      │  │
+│  │  Estado:      __________________      │  │
+│  │                                       │  │
+│  └───────────────────────────────────────┘  │
+│                                             │
+├─────────────────────────────────────────────┤
+│                 RODAPÉ                      │
+└─────────────────────────────────────────────┘ --> */

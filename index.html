@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Cep</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>BUSCADOR DE CEP </h1>
+    </header>
+   <main id="container-geral">
+      <form id="form-consulta">
+        <h2>CONSULTAR CEP</h2>
+      <label for="input-cep">Digite o CEP</label>
+      <input type="text" name="cep" id="input-cep" maxlength="9" inputmode="numeric" placeholder="00000-000" required>
+      <button id="botao-buscar" type="submit">Buscar</button>
+      <button id="botao-limpar" type="button">Limpar</button>
+      <p id="mensagem-status" role="status" aria-live="polite"></p>
+      </form>
+      <section id="card-informacoes">
+        <h2>INFORMAÇÕES DO ENDEREÇO</h2>
+        <p>CEP: <span id="span-cep"></span></p>
+            <p>Logradouro :<span id="span-logradouro"></span></p>
+            <p>Bairro: <span id="span-bairro"></span></p>
+            <p>Cidade: <span id="span-cidade"></span></p>
+            <p>Estado: <span id="span-estado"></span></p>
+      </section>
+   </main>
+   <script src="script.js"></script>
+</body>
+</html>
+<!-- 
+┌─────────────────────────────────────────────┐
+│                                             │
+│              BUSCADOR DE CEP                │
+│                                             │
+├─────────────────────────────────────────────┤
+│                                             │
+│  ┌───────────────────────────────────────┐  │
+│  │           CONSULTAR CEP               │  │
+│  │                                       │  │
+│  │  Digite o CEP                         │  │
+│  │  ┌─────────────────────────────────┐  │  │
+│  │  │ 00000-000                       │  │  │
+│  │  └─────────────────────────────────┘  │  │
+│  │                                       │  │
+│  │  [   BUSCAR   ]    [   LIMPAR   ]     │  │
+│  └───────────────────────────────────────┘  │
+│                                             │
+│  ┌───────────────────────────────────────┐  │
+│  │       INFORMAÇÕES DO ENDEREÇO         │  │
+│  │                                       │  │
+│  │  CEP:         __________________      │  │
+│  │  Logradouro:  __________________      │  │
+│  │  Bairro:      __________________      │  │
+│  │  Cidade:      __________________      │  │
+│  │  Estado:      __________________      │  │
+│  │                                       │  │
+│  └───────────────────────────────────────┘  │
+│                                             │
+├─────────────────────────────────────────────┤
+│                 RODAPÉ                      │
+└─────────────────────────────────────────────┘ -->
+
+<!-- 1. Funcionalidades que vamos implementar
+Nº	Funcionalidade	Descrição
+F01	Informar CEP	Campo para digitar um CEP brasileiro
+F02	Validar CEP	Aceitar somente 8 dígitos numéricos, com ou sem hífen
+F03	Consultar API	Buscar o endereço utilizando fetch()
+F04	Exibir endereço	Mostrar logradouro, bairro, cidade, estado e CEP
+F05	CEP inexistente	Informar quando o CEP não for encontrado
+F06	Tratar erros	Exibir mensagem quando ocorrer falha de conexão ou resposta inválida
+F07	Indicador de carregamento	Mostrar "Buscando endereço..." durante a consulta
+F08	Limpar resultado	Permitir limpar a pesquisa e os dados exibidos
+F09	Nova consulta	Permitir pesquisar outro CEP sem recarregar a página
+F10	Interface responsiva	Adaptar a aplicação para celular e computador
+2. Regras de negócio
+Essas são as regras que nosso JavaScript deverá respeitar:
+- RN01: o CEP é obrigatório.
+- RN02: após remover o hífen, o CEP deve possuir exatamente 8 dígitos numéricos.
+- RN03: não realizar requisição à API quando o CEP for inválido.
+- RN04: mostrar os dados somente quando a consulta retornar um endereço válido.
+- RN05: apresentar uma mensagem amigável quando o CEP não existir.
+- RN06: não manter resultados antigos na tela após uma consulta malsucedida.
+- RN07: impedir consultas duplicadas enquanto uma pesquisa estiver em andamento.
+3. Casos de teste
+Vamos utilizar estes testes para verificar se o sistema está funcionando corretamente.
+Plano de testes — Projeto 9
+12 testes
+
+Marque os testes conforme implementar e verificar
+
+0/12
+
+
+
+[ ] 
+T01
+
+CEP válido com 8 dígitos
+
+Entrada: 01001000 · Exibir endereço retornado pela API
+
+
+[ ] 
+T02
+
+CEP válido com hífen
+
+Entrada: 01001-000 · Consultar normalmente
+
+
+[ ] 
+T03
+
+CEP vazio
+
+Impedir a consulta e solicitar preenchimento
+
+
+[ ] 
+T04
+
+CEP incompleto
+
+Entrada: 01001 · Exibir mensagem de CEP inválido
+
+
+[ ] 
+T05
+
+CEP com dígitos excedentes
+
+Entrada: 010010000 · Impedir a consulta
+
+
+[ ] 
+T06
+
+CEP com letras
+
+Entrada: 0100A000 · Exibir mensagem de CEP inválido
+
+
+[ ] 
+T07
+
+CEP inexistente
+
+Entrada: 99999999 · Exibir aviso se a API confirmar que não existe
+
+
+[ ] 
+T08
+
+Falha de conexão
+
+Entrada: Internet desligada · Exibir mensagem de erro amigável
+
+
+[ ] 
+T09
+
+Carregamento
+
+Entrada: Durante a consulta · Exibir indicador de carregamento
+
+
+[ ] 
+T10
+
+Nova consulta
+
+Entrada: Pesquisar dois CEPs · Atualizar o endereço sem recarregar a página
+
+
+[ ] 
+T11
+
+Limpar pesquisa
+
+Entrada: Clicar em Limpar · Limpar CEP, endereço e mensagens
+
+
+[ ] 
+T12
+
+Tela responsiva
+
+Entrada: Largura de celular · Interface sem cortes ou rolagem horizontal
+
+
+
+O CEP 01001000 será usado como exemplo de consulta válida. Para o teste de CEP inexistente, a resposta da API determinará o resultado.4. Tecnologias e conceitos
+Tecnologia	O que vamos praticar
+HTML5	Formulários semânticos e validação
+CSS3	Layout responsivo e estados visuais
+JavaScript	DOM, eventos, funções e condicionais
+Fetch API	Requisições HTTP GET
+Async/Await	Programação assíncrona
+JSON	Interpretação de respostas da API
+Try/Catch	Tratamento de erros
+5. Ordem de desenvolvimento
+1. HTML: criar a estrutura semântica e os campos.
+2. CSS: construir a interface e torná-la responsiva.
+3. JavaScript básico: capturar CEP e validar os dados.
+4. Integração com API: implementar fetch(), async/await e JSON.
+5. Tratamento de erros: CEP inexistente, conexão e carregamento.
+6. Testes: executar os 12 casos e corrigir problemas.
+7. GitHub: organizar código, criar README e publicar. -->
